@@ -18,8 +18,6 @@
 import { mapGetters } from 'vuex'
 import SwDatePicker from '@bytefury/spacewind/src/components/SwDatePicker'
 import moment from 'moment'
-const fromMomentDate = (date, format = 'YYYY-MM-DD') =>
-  moment(new Date(date), format)
 
 export default {
   components: {
@@ -76,13 +74,17 @@ export default {
     }),
   },
   watch: {
-    value(val) {
-      if (val && !this.enableTime) {
-        this.date = fromMomentDate(val, 'YYYY-MM-DD').format('YYYY-MM-DD')
-      } else {
-        this.date = fromMomentDate(val, 'YYYY-MM-DD').format('YYYY-MM-DD H:m:s')
-      }
-    },
+    // value(val) {
+    //   console.log(val)
+
+    //   if (val && !this.enableTime) {
+    //     this.date = moment(new Date(val), 'YYYY-MM-DD').format('YYYY-MM-DD')
+    //   } else {
+    //     this.date = moment(new Date(val), 'YYYY-MM-DD').format(
+    //       'YYYY-MM-DD H:m:s'
+    //     )
+    //   }
+    // },
     enableTime(val) {
       this.$set(this.config, 'enableTime', this.enableTime)
     },
@@ -104,6 +106,7 @@ export default {
   },
   mounted() {
     this.$set(this.config, 'enableTime', this.enableTime)
+
     if (!this.enableTime) {
       this.$set(
         this.config,
@@ -117,12 +120,16 @@ export default {
         this.carbonFormat ? `${this.carbonFormat} H:i ` : 'd M Y H:i'
       )
     }
+
     if (this.value && !this.enableTime) {
-      this.date = fromMomentDate(this.value, 'YYYY-MM-DD').format('YYYY-MM-DD')
+      this.date = moment(new Date(this.value), 'YYYY-MM-DD').format(
+        'YYYY-MM-DD'
+      )
       return true
     }
+
     if (this.value) {
-      this.date = fromMomentDate(this.value, 'YYYY-MM-DD').format(
+      this.date = moment(new Date(this.value), 'YYYY-MM-DD').format(
         'YYYY-MM-DD HH:mm:SS'
       )
     }
@@ -130,7 +137,6 @@ export default {
   methods: {
     onDateChange(date) {
       this.$emit('input', date)
-      this.$emit('change', date)
     },
   },
 }

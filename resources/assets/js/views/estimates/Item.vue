@@ -296,7 +296,7 @@ export default {
       },
       set: function (newValue) {
         if (parseFloat(newValue) > 0) {
-          this.item.price = newValue * 100
+          this.item.price = (newValue * 100).toFixed(2)
           this.maxDiscount = this.item.price
         } else {
           this.item.price = newValue
@@ -340,7 +340,7 @@ export default {
           between: between(0, this.maxDiscount),
         },
         description: {
-          maxLength: maxLength(255),
+          maxLength: maxLength(65000),
         },
       },
     }

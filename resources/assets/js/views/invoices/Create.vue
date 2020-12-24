@@ -76,7 +76,7 @@
               :calendar-button="true"
               calendar-button-icon="calendar"
               class="mt-2"
-              @change="$v.newInvoice.invoice_date.$touch()"
+              @input="$v.newInvoice.invoice_date.$touch()"
             />
           </sw-input-group>
 
@@ -91,7 +91,7 @@
               :calendar-button="true"
               calendar-button-icon="calendar"
               class="mt-2"
-              @change="$v.newInvoice.due_date.$touch()"
+              @input="$v.newInvoice.due_date.$touch()"
             />
           </sw-input-group>
 
@@ -254,7 +254,7 @@
           >
             <sw-button
               type="button"
-              class="flex justify-center w-full text-sm lg:w-auto"
+              class="flex justify-center w-full text-sm text-black lg:w-auto hover:bg-gray-400"
               variant="gray"
               @click="openTemplateModal"
             >
